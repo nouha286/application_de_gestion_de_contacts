@@ -11,7 +11,7 @@ class Compte extends Database
    public function set_data()
    {
    
-       $sql=" INSERT INTO compte_utilisateurs VALUES(NULL,'$this->user','$this->password ',sysdate())";
+       $sql=" INSERT INTO compte_utilisateurs VALUES(NULL,'$this->user','$this->password',sysdate())";
        $result=$this->connect()->query($sql);
        if($result)
        {
@@ -29,7 +29,8 @@ class Compte extends Database
    }
    function set_pass($password)
    {
-       $this->password=$password;
+      
+       $this->password=md5($password);
    }
    function get_pass()
    {
@@ -103,23 +104,24 @@ class User extends Database
         $sql="SELECT * FROM add_contact WHERE id_user='$id_f'";
         $result=$this->connect()->query($sql);
         $numRows=$result->num_rows;
+        
         if($numRows!=0)
         {
-            while ($row=$result->fetch_assoc())
+            while($row=$result->fetch_assoc())
             {
                $data[]=$row; 
-               return $data;
             }
+            return $data;
             
         }
         else
         {
-            echo '<div class="card container  mb-3" style="width:400px; border:2px solid red;" >
+            echo '<div class="card container  mb-3" style="width:400px;  box-shadow: 5px 10px #888888;" >
             <img src="R.jpg" class="card-img-top " alt="..."  ">
             <div class="card-body"  >
               <h5 class="card-title">No contact founded!!</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <p class="card-text">Vous pouvez ajoutez des nouveaux contact.</p>
+              <p class="card-text"><small class="text-muted"></small></p>
             </div>';
             
         } 

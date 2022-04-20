@@ -16,7 +16,7 @@ button.disabled=true;
 //-----------------------------------------validation_page_d'inscription-------------------------------------//
 function valid()
 { 
-    formulaire.addEventListener('click',()=>{
+    formulaire.addEventListener('mousemove',()=>{
        
         if(username.value=="" || password.value=="" || v_pass.value=="")
         { 

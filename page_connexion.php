@@ -5,9 +5,11 @@
     {
         $connection=new Compte();
                 
+                echo md5($_POST['pass']).'<br>';
              
                 $connection->set_users($_POST['user']);
                 $connection->set_pass($_POST['pass']);  
+                $connection->get_pass();  
                
                 $sql="SELECT * FROM compte_utilisateurs WHERE username='$connection->user' AND password='$connection->password' ";
                 $result=$connection->connect()->query($sql);
@@ -16,7 +18,7 @@
                 if($numRows!=0)
                 {   header('location: page_contact.php');
                     session_start();
-                    $_SESSION['date']=date('l j F Y, H:i');;
+                    $_SESSION['date']=date('l j F Y, H:i');
                     $_SESSION['name']=$connection->user;
                     $_SESSION['id']=$res['id'];
                     $alert='';
@@ -33,8 +35,9 @@
                         </div>
                     </div>';
                     
-                   
-echo md5($_POST['pass']);
+                   echo $connection->get_pass().'<br>';  
+                   echo md5(123456);
+
                 }
                
     }

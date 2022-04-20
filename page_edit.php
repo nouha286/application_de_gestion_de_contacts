@@ -1,5 +1,6 @@
 <?php 
     include('add_comptes.php');
+    include('test_session.php');
     
    class ShowUser_id extends Edit
    { public $contact_e;

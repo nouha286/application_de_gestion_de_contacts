@@ -16,7 +16,7 @@ button.disabled=true;
 valid_contact();
 function valid_contact() 
 {
-    formulaire.addEventListener('click',()=>{
+    formulaire.addEventListener('mousemove',()=>{
         if(nom.value=="" || email.value=="")
         {
             button.disabled=true;

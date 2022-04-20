@@ -41,9 +41,9 @@
         </div>
     </nav>
    
- <div class="container" style="overflow-x:auto;">>
+ <div class="container" style="overflow-x:auto;">
  
- <table class="table table-dark table-hover mt-5"  >
+ <table class="table table-dark table-hover mt-5">
  
 
   <?php
@@ -53,10 +53,10 @@
             function showAllContact()
             {
                 $datas=$this->getAllContact();
+                // var_dump($datas);
                 if($datas)
-                {
-                  foreach ($datas as $data )
-                  {  echo'<thead>
+                {echo '
+                  <thead>
                     <tr>
                       <th scope="col">id</th>
                       <th scope="col">Name</th>
@@ -67,8 +67,9 @@
                 
                     </tr>
                   </thead>
-                  <tbody>
-                    
+                  <tbody>';
+                  foreach($datas as $data)
+                  {  echo'
                     <tr>
                    <th scope="row">'.$data['id'].'</th>
                    <td>'.$data['nom'].'</td>

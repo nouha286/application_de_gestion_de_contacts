@@ -11,7 +11,7 @@ valid_connexion();
 button_conn.disabled=true;
 function valid_connexion()
 {
-    formulaire_conn.addEventListener('click',()=>{
+    formulaire_conn.addEventListener('mousemove',()=>{
         if (user_conn.value=="" || password_conn.value=="") 
         {
             button_conn.disabled=true;

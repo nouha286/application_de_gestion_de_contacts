@@ -6,7 +6,7 @@
                 
 
                 $inscription->set_users($_POST['username']);
-                $inscription->set_pass(md5($_POST['password']));
+                $inscription->set_pass($_POST['password']);
                 $inscription->set_data();
                
             }
