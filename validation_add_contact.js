@@ -45,7 +45,7 @@ function valid_contact()
                 button.disabled=true;
                 email.style.border="2px solid red";
                 msg_email.innerHTML=`<div class="alert alert-danger" role="alert">
-                il faut entrez un nom de deux caractéres aux minimum, sans des caractéres spéciaux [-,.!?@] !
+                il faut entrez un nom email valid!
               </div>`
 
             }

@@ -1,5 +1,6 @@
 <?php 
     include('add_comptes.php');
+    include('test_session_logout.php');
     if(isset($_POST['save']))
             {
                 $inscription=new Compte();

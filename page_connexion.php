@@ -1,11 +1,12 @@
 <?php 
     include('add_comptes.php');
+    include('test_session_logout.php');
     $alert='';
     if (isset($_POST['login']) && isset($_POST['user']) && isset($_POST['pass']) )
     {
         $connection=new Compte();
                 
-                echo md5($_POST['pass']).'<br>';
+               
              
                 $connection->set_users($_POST['user']);
                 $connection->set_pass($_POST['pass']);  
@@ -35,8 +36,7 @@
                         </div>
                     </div>';
                     
-                   echo $connection->get_pass().'<br>';  
-                   echo md5(123456);
+                   
 
                 }
                

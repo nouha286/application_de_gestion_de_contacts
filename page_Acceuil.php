@@ -1,5 +1,6 @@
 <?php 
     include('connexion_Mysql.php');
+    include('test_session_logout.php');
     
 ?>
 <!DOCTYPE html>

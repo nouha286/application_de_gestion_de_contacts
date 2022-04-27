@@ -8,6 +8,7 @@ class Compte extends Database
     public $user;
     public $password;
     public $date;
+    
    public function set_data()
    {
    
@@ -22,6 +23,10 @@ class Compte extends Database
            echo "l'ajout est échoué!";
        }
    }
+
+ 
+
+   
 
    function set_users($user)
    {
@@ -44,7 +49,7 @@ class Compte extends Database
 
    
 }
-//-------------------------------------------Classe pour création contact--------------------------------------------------//
+//-------------------------------------------Classe pour création et affichage de contact--------------------------------------------------//
 
 class Contact extends Database
 
@@ -54,111 +59,78 @@ class Contact extends Database
     public $phone;
     public $address;
     public $id;
-   public function set_contact()
-   {  session_start();
-    $connection=new Compte();
-        
 
-       $sql=" INSERT INTO add_contact VALUES('$this->name','$this->phone','$this->email','$this->address',NULL,$this->id )";
-       $result=$connection->connect()->query($sql);
-       if($result)
+    //methode pour création contact//
+    function set_contact()
+       
+    { 
+            session_start();
+            $connection=new Compte();
+                
+
+            $sql=" INSERT INTO add_contact VALUES('$this->name','$this->phone','$this->email','$this->address',NULL,$this->id )";
+            $result=$connection->connect()->query($sql);
+            if($result)
+            {
+                header('location: page_contact.php');
+            }
+            else
+            {
+                echo "l'ajout est échoué!";
+            }
+   }
+
+
+
+   //methode pour l'affichage des contacts//
+
+   function getAllContact()
+   {  
+       $id_f=$_SESSION['id'];
+       $sql="SELECT * FROM add_contact WHERE id_user='$id_f'";
+       $result=$this->connect()->query($sql);
+       $numRows=$result->num_rows;
+       
+       if($numRows!=0)
        {
-           header('location: page_contact.php');
+           while($row=$result->fetch_assoc())
+           {
+              $data[]=$row; 
+           }
+           return $data;
+           
        }
        else
        {
-           echo "l'ajout est échoué!";
-       }
-   }
+           echo '<div class="card container mt-3  mb-3" style="width:400px;  box-shadow: 5px 10px #888888;" >
+           <img src="R.jpg" class="card-img-top " alt="..."  ">
+           <div class="card-body"  >
+             <h5 class="card-title">No contact founded!!</h5>
+             <p class="card-text">Vous pouvez ajoutez des nouveaux contact en cliquant sur le boutton ce dessous.</p>
+             <p class="card-text"><small class="text-muted"></small></p>
+           </div>';
+           
+       } 
+    }
 
-   function set_name($name)
-   {
-       $this->name=$name;
-   }
-   function set_phone($phone)
-   {
-       $this->phone=$phone;
-   }
-   function set_address($address)
-   {
-       $this->address=$address;
-   }
-   function set_email($email)
-   {
-       $this->email=$email;
-   }
-   function set_id($id)
-   {
-       $this->id=$id;
-   }
-  
+    //methode pour modification contact//
 
-}
-
-//-------------------------Classe pour affichage des contacts--------------------------------------------------//
-class User extends Database
-{
-    function getAllContact()
-    {  
-        $id_f=$_SESSION['id'];
-        $sql="SELECT * FROM add_contact WHERE id_user='$id_f'";
+     function set_contact_edit()
+    {
+    
+        $sql=" UPDATE add_contact SET nom='$this->name',phone='$this->phone',email='$this->email',address='$this->address' WHERE id='$this->id' ";
         $result=$this->connect()->query($sql);
-        $numRows=$result->num_rows;
-        
-        if($numRows!=0)
+        if($result)
         {
-            while($row=$result->fetch_assoc())
-            {
-               $data[]=$row; 
-            }
-            return $data;
-            
+            header('location: page_contact.php');
         }
         else
         {
-            echo '<div class="card container  mb-3" style="width:400px;  box-shadow: 5px 10px #888888;" >
-            <img src="R.jpg" class="card-img-top " alt="..."  ">
-            <div class="card-body"  >
-              <h5 class="card-title">No contact founded!!</h5>
-              <p class="card-text">Vous pouvez ajoutez des nouveaux contact.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>';
-            
-        } 
-
+            echo "l'ajout est échoué!";
+        }
     }
-}
 
-////////////------------------------------Classe pour modification des donnée contacts--------------------------------------------////////////
-
-
-
-
-
-
-
-
-class Edit extends Database 
-{
-    public $name;
-    public $email;
-    public $phone;
-    public $address;
-    public $id;
-   public function set_contact_edit()
-   {
-   
-       $sql=" UPDATE add_contact SET nom='$this->name',phone='$this->phone',email='$this->email',address='$this->address' WHERE id='$this->id' ";
-       $result=$this->connect()->query($sql);
-       if($result)
-       {
-           header('location: page_contact.php');
-       }
-       else
-       {
-           echo "l'ajout est échoué!";
-       }
-   }
+    //methodes seters et guetters//
 
    function set_name($name)
    {
@@ -179,11 +151,13 @@ class Edit extends Database
    function set_id($id)
    {
        $this->id=$id;
-   } 
+   }
    function get_id()
    {
        return $this->id;
    } 
 
 }
+
+
 ?>

@@ -2,24 +2,22 @@
     include('add_comptes.php');
     include('test_session.php');
     
-   class ShowUser_id extends Edit
-   { public $contact_e;
-       function get_data()
-       {
-        $edit=new Edit();
+    
+       
+        $edit=new Contact();
         $edit->set_id($_GET['id']);
         $getid=$edit-> get_id();
      
         $sql="SELECT * FROM add_contact WHERE id= $getid";
-        $result=$this->connect()->query($sql);
-        return $result->fetch_assoc();
-       }
+        $result=$edit->connect()->query($sql);
+        $modification=$result->fetch_assoc();
+       
    
-   }
+   
  
     if(isset($_POST['save']))
     {
-        $contact=new Edit();
+        $contact=new Contact();
         $contact->set_id($_GET['id']);
        
         $contact->set_email($_POST['email']);
@@ -29,7 +27,7 @@
         $contact->set_contact_edit();
         
         
-    }
+  }
 
 ?>
 <!DOCTYPE html>
@@ -56,7 +54,7 @@
     <div class=" row  g-3 ">
         <div class="col-md-6">
         <label for="name" class="form-label mt-2">Name</label>
-        <input type="text" name="name" class="form-control" id="name" value="<?php $name=new ShowUser_id(); $name->get_data(); $test=$name->get_data(); echo  $test['nom'];?>" placeholder="Enter name" >
+        <input type="text" name="name" class="form-control" id="name" value="<?php  echo  $modification['nom'];?>" placeholder="Enter name" >
         <span id="msg_nom">
 
        </span>  
@@ -64,7 +62,7 @@
         
         <div class="col-md-6">
         <label for="phone" class="form-label mt-2">Phone</label>
-        <input type="text" name="phone" class="form-control" value="<?php $name=new ShowUser_id(); $name->get_data(); $test=$name->get_data(); echo  $test['phone'];?>" id="phone" placeholder="Enter phone">
+        <input type="text" name="phone" class="form-control" value="<?php  echo  $modification['phone'];?>" id="phone" placeholder="Enter phone">
         </div>
         <span id="msg_phone">
 
@@ -75,14 +73,14 @@
     
     <div class="mt-2">
       <label for="email" class="form-label mt-2">Email</label>
-      <input type="text" name="email" class="form-control" value="<?php $name=new ShowUser_id(); $name->get_data(); $test=$name->get_data(); echo  $test['email'];?>" id="email" placeholder="email">
+      <input type="text" name="email" class="form-control" value="<?php  echo  $modification['email'];?>" id="email" placeholder="email">
     </div>
      <span id="msg_email">
 
         </span>
     <div class="mt-2">
       <label for="address" class="form-label mt-2">Address </label>
-      <input id="address" name="address" class="form-control" value="<?php $name=new ShowUser_id(); $name->get_data(); $test=$name->get_data(); echo  $test['address'];?>" aria-label="With textarea"placeholder="Enter address" ></input>
+      <input id="address" name="address" class="form-control" value="<?php  echo  $modification['address'];?>" aria-label="With textarea"placeholder="Enter address" ></input>
     </div>
     
    

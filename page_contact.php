@@ -48,14 +48,13 @@
 
   <?php
   
-          class ViewContact extends User 
-        {
-            function showAllContact()
-            {
-                $datas=$this->getAllContact();
-                // var_dump($datas);
+         
+                $datas=new Contact;
+                $datas=$datas->getAllContact();
+                
                 if($datas)
-                {echo '
+                {
+                  echo '
                   <thead>
                     <tr>
                       <th scope="col">id</th>
@@ -85,10 +84,9 @@
                 
                 }
                
-            }
-        }
-        $users=new ViewContact();
-        $users->showAllContact();
+           
+        
+      
 
 
 

@@ -25,7 +25,7 @@
         </div>
     </nav>
    
- <div class="container" style="overflow-x:auto;">>
+ <div class="container" style="overflow-x:auto;">
  
  <table class="table table-dark table-hover mt-5"  >
  <thead>
@@ -33,23 +33,16 @@
       <th scope="col">username</th>
       <th scope="col">Signup date</th>
       <th scope="col">Last login</th>
-
     </tr>
   </thead>
   <tbody>
 
   <?php
 
-  
-          class ViewInformation extends Compte
-        {
+
+              $contact=new Database();
             
-            function showInformation()
-            {
-                $contact=new Compte();
-            
-              
-               $id=$_SESSION['id'];
+                $id=$_SESSION['id'];
                 $sql="SELECT date_inscription FROM compte_utilisateurs WHERE id='$id'";
                 $result=$contact->connect()->query($sql);
                
@@ -62,14 +55,7 @@
                   <td>'.$r['date_inscription'].'</td>
                   <td>'.$_SESSION['date'].'</td>
                  </tr>';
-                  
-                
-            }
-        }
-        $users=new ViewInformation();
-        $users-> showInformation();
-
-
+ 
 
   ?>
    
